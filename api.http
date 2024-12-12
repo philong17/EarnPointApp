@@ -1,0 +1,102 @@
+@baseUrl = http://localhost:3000
+
+### Customers API ###
+
+# Tạo khách hàng mới
+POST {{baseUrl}}/customers
+Content-Type: application/json
+
+{
+  "name": "Phi Long",
+  "email": "philong@example.com",
+  "phone": "0123456789"
+}
+
+### Lấy danh sách khách hàng
+GET {{baseUrl}}/customers
+
+### Lấy thông tin một khách hàng
+GET {{baseUrl}}/customers/2
+
+### Cập nhật thông tin khách hàng
+PATCH {{baseUrl}}/customers/2
+Content-Type: application/json
+
+{
+  "name": "Phi Long Updated",
+  "phone": "0987654321"
+}
+
+### Point Rules API ###
+
+# Tạo quy tắc tích điểm cơ bản
+POST {{baseUrl}}/point-rules
+Content-Type: application/json
+
+{
+  "name": "Basic Rule",
+  "type": "BASIC",
+  "spendAmount": 1000,
+  "pointAmount": 1
+}
+
+### Tạo quy tắc tích điểm cuối tuần
+POST {{baseUrl}}/point-rules
+Content-Type: application/json
+
+{
+  "name": "Weekend Special",
+  "type": "TIME_BASED",
+  "spendAmount": 10000,
+  "pointAmount": 2,
+  "startTime": "2024-12-07T00:00:00Z",
+  "endTime": "2024-12-08T23:59:59Z"
+}
+
+### Lấy danh sách quy tắc
+GET {{baseUrl}}/point-rules
+
+### Tính điểm cho giao dịch
+GET {{baseUrl}}/point-rules/calculate?amount=50000
+
+### Points API ###
+
+# Tích điểm cho khách hàng
+POST {{baseUrl}}/points
+Content-Type: application/json
+
+{
+  "points": 100,
+  "type": "EARN",
+  "description": "Mua hàng",
+  "customerId": 1
+}
+
+### Đổi điểm thưởng
+POST {{baseUrl}}/points
+Content-Type: application/json
+
+{
+  "points": 50,
+  "type": "REDEEM",
+  "description": "Đổi voucher",
+  "customerId": 1
+}
+
+### Lấy lịch sử điểm của khách hàng
+GET {{baseUrl}}/points/customer/1
+
+### Analytics API ###
+
+### Phân tích theo ngày
+GET {{baseUrl}}/analytics/daily?date=2024-12-04
+
+### Phân tích theo tuần
+GET {{baseUrl}}/analytics/weekly?date=2024-12-04
+
+### Phân tích theo tháng
+GET {{baseUrl}}/analytics/monthly?date=2024-12-04
+
+
+### Thống kê tổng quan
+GET {{baseUrl}}/analytics/dashboard 
